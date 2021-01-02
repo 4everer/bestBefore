@@ -38,6 +38,7 @@ public interface FoodDao {
     @Query("SELECT * FROM dim_food WHERE DATE(mBestBeforeDate) < DATE('now')")
     LiveData<List<FoodEntity>> getBadFood();
 
-    @Query("SELECT * FROM dim_food WHERE DATE(mBestBeforeDate) < DATE('now')")
-    LiveData<List<FoodEntity>> getFoodExpireInDays(int days);
+    // Todo
+    //    @Query("SELECT * FROM dim_food WHERE DATE(mBestBeforeDate) < DATE('now')")
+    //    LiveData<List<FoodEntity>> getFoodExpireInDays(int days);
 }

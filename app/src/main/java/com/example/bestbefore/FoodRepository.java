@@ -1,7 +1,5 @@
 package com.example.bestbefore;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
@@ -12,15 +10,17 @@ import com.example.bestbefore.db.entity.FoodEntity;
 import java.util.List;
 
 public class FoodRepository {
-    final private AppExecutors mAppExecutors;
+    private static AppExecutors mAppExecutors;
+    private final FoodRoomDatabase mDatabase;
+
+    private static FoodRepository sInstance;
     private FoodDao mFoodDao;
     private MediatorLiveData<List<FoodEntity>> mObeservableFood;
 
-    public FoodRepository(Application application, AppExecutors appExecutors) {
+    public FoodRepository(AppExecutors appExecutors, FoodRoomDatabase database) {
+        mAppExecutors = appExecutors;
+        mDatabase = database;
 
-        this.mAppExecutors = appExecutors;
-
-        FoodRoomDatabase mDatabase = FoodRoomDatabase.getInstance(application, appExecutors);
         mFoodDao = mDatabase.foodDao();
         mObeservableFood = new MediatorLiveData<>();
 
@@ -30,6 +30,17 @@ public class FoodRepository {
                         mObeservableFood.postValue(foodEntities);
                     }
                 });
+    }
+
+    public static FoodRepository getInstance(final FoodRoomDatabase database) {
+        if (sInstance == null) {
+            synchronized (FoodRepository.class) {
+                if (sInstance == null) {
+                    sInstance = new FoodRepository(mAppExecutors, database);
+                }
+            }
+        }
+        return sInstance;
     }
 
 
