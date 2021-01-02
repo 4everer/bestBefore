@@ -1,13 +1,7 @@
 *.iml
 .gradle
 /local.properties
-/.idea/vcs.xml
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/*
 .DS_Store
 /build
 /captures
@@ -15,7 +9,6 @@
 .cxx
 local.properties
 .project
-.idea/.name
 .settings/org.eclipse.buildship.core.prefs
 app/.classpath
 app/.project
