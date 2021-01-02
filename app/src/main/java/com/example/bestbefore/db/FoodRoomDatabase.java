@@ -65,6 +65,8 @@ public abstract class FoodRoomDatabase extends RoomDatabase {
                         });
                     }
                 })
+                // Wipes and rebuilds instead of migrating, for test and demo
+                .fallbackToDestructiveMigration()
                 .build();
     }
 

@@ -14,7 +14,7 @@ import java.util.Random;
 public class DataGenerator {
 
     private static final String[] FOOD_NAME = new String[]{
-            "Special edition", "New", "Cheap", "Quality", "Used"};
+            "Milk", "Apples", "Beef", "Mango", "Orange Juice"};
     private static final LocalDate[] BEST_BEFORE_DATE = new LocalDate[]{
             LocalDate.now(), LocalDate.now().plusDays(1), LocalDate.now().plusDays(5), LocalDate.now().minusDays(1)};
 
