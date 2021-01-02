@@ -20,6 +20,8 @@ public class FoodEntity implements Food {
 
     public int getId() {return id;}
 
+    public void setId(int id) { this.id = id; }
+
     @Override
     public String getFoodName(){return this.mFoodName;}
 
