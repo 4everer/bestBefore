@@ -38,7 +38,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
         }
     }
 
-    void setWords(List<FoodEntity> foods){
+    void setFoods(List<FoodEntity> foods){
         mFoods = foods;
         notifyDataSetChanged();
     }
