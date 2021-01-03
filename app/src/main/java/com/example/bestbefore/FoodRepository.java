@@ -59,4 +59,10 @@ public class FoodRepository {
             mFoodDao.deleteAll();
         });
     }
+
+    public void deleteFood(FoodEntity food) {
+        mAppExecutors.diskIO().execute(() -> {
+            mFoodDao.deleteFood(food);
+        });
+    }
 }

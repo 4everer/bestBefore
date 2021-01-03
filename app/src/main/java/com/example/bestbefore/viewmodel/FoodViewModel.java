@@ -30,6 +30,8 @@ public class FoodViewModel extends AndroidViewModel {
 
     public void deleteAll() { mFoodRepository.deleteAll(); }
 
+    public void deleteFood(FoodEntity food) {mFoodRepository.deleteFood(food);}
+
     /**
      * A creator is used to inject the product ID into the ViewModel
      * <p>

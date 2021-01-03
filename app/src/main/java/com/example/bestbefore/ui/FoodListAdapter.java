@@ -49,6 +49,10 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
         else return 0;
     }
 
+    public FoodEntity getFoodAtPosition (int position) {
+        return mFoods.get(position);
+    }
+
     public class FoodViewHolder extends RecyclerView.ViewHolder {
 
         private TextView foodItemView;
