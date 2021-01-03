@@ -40,14 +40,14 @@ public class FoodEntity implements Food {
 
     public FoodEntity(){}
 
-    @Ignore
-    public FoodEntity(int id, @NonNull String foodName, int quantity, LocalDate bestBeforeDate) {
-        this.id = id;
+
+    public FoodEntity(@NonNull String foodName, int quantity, LocalDate bestBeforeDate) {
         this.mFoodName = foodName;
         this.mQuantity = quantity;
         this.mBestBeforeDate = bestBeforeDate;
     }
-
+    
+    @Ignore
     public FoodEntity(Food food) {
         this.id = food.getId();
         this.mFoodName = food.getFoodName();

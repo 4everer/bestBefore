@@ -28,6 +28,8 @@ public class FoodViewModel extends AndroidViewModel {
     public LiveData<List<FoodEntity>> getAllFood() { return mAllFood; }
     public void insertFood(FoodEntity food) { mFoodRepository.insertFood(food); }
 
+    public void deleteAll() { mFoodRepository.deleteAll(); }
+
     /**
      * A creator is used to inject the product ID into the ViewModel
      * <p>

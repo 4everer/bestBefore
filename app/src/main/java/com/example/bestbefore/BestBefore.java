@@ -20,6 +20,6 @@ public class BestBefore extends Application {
     }
 
     public FoodRepository getRepository() {
-        return FoodRepository.getInstance(getDatabase());
+        return FoodRepository.getInstance(mAppExecutors, getDatabase());
     }
 }

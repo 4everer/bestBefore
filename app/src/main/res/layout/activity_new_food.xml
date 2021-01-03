@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorScreenBackground"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/edit_food_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:autofillHints=""
+        android:hint="@string/hint_food"
+        android:inputType="textAutoComplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_sharp_sign"
+        style="@style/row_input"
+        android:text="@string/sharp_sign"
+        android:textAlignment="textEnd"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit_quantity"
+        app:layout_constraintEnd_toStartOf="@+id/edit_quantity"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_quantity"
+        android:hint="@string/quantity"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/edit_date"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintStart_toEndOf="@+id/text_sharp_sign"
+        app:layout_constraintTop_toBottomOf="@+id/edit_food_name"
+        style="@style/row_input"
+        android:text="@string/default_quantity_one"
+        android:autofillHints="1" />
+
+    <TextView
+        android:id="@+id/edit_date"
+        style="@style/row_input"
+        android:hint="@string/pick_date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edit_quantity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintStart_toEndOf="@+id/edit_quantity"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="@string/button_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_date" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

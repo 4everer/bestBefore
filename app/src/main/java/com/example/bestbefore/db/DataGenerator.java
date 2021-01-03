@@ -24,7 +24,7 @@ public class DataGenerator {
         for (String s : FOOD_NAME) {
             for (LocalDate localDate : BEST_BEFORE_DATE) {
                 FoodEntity food = new FoodEntity();
-                food.setFoodName(s + " " + localDate);
+                food.setFoodName(s);
                 food.setQuantity(rnd.nextInt(240));
                 food.setBestBeforeDate(localDate);
                 foods.add(food);

@@ -32,11 +32,11 @@ public class FoodRepository {
                 });
     }
 
-    public static FoodRepository getInstance(final FoodRoomDatabase database) {
+    public static FoodRepository getInstance(AppExecutors appExecutors, final FoodRoomDatabase database) {
         if (sInstance == null) {
             synchronized (FoodRepository.class) {
                 if (sInstance == null) {
-                    sInstance = new FoodRepository(mAppExecutors, database);
+                    sInstance = new FoodRepository(appExecutors, database);
                 }
             }
         }
@@ -51,6 +51,12 @@ public class FoodRepository {
     public void insertFood (FoodEntity food) {
         mAppExecutors.diskIO().execute(() -> {
             mFoodDao.insertFood(food);
+        });
+    }
+
+    public void deleteAll() {
+        mAppExecutors.diskIO().execute(() -> {
+            mFoodDao.deleteAll();
         });
     }
 }

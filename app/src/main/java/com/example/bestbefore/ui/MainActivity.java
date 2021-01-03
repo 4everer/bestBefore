@@ -1,11 +1,15 @@
 package com.example.bestbefore.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,12 +17,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bestbefore.R;
 import com.example.bestbefore.db.entity.FoodEntity;
 import com.example.bestbefore.viewmodel.FoodViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private FoodViewModel mFoodViewModel;
+    public static final int NEW_FOOD_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,5 +48,62 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setFoods(foods);
             }
         });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NewFoodActivity.class);
+                startActivityForResult(intent, NEW_FOOD_ACTIVITY_REQUEST_CODE);
+            }
+        });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // The options menu has a single item "Clear all data now"
+    // that deletes all the entries in the database.
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, as long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.clear_data) {
+            // Add a toast just for confirmation
+            Toast.makeText(this, R.string.clear_data_toast_text, Toast.LENGTH_LONG).show();
+
+            // Delete the existing data.
+            mFoodViewModel.deleteAll();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        if (requestCode == NEW_FOOD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle extras = intent.getExtras();
+            String foodName = extras.getString("FOOD_NAME");
+            int quantity = extras.getInt("QUANTITY");
+            LocalDate bestBeforeDate = LocalDate.parse(extras.getString("BEST_BEFORE_DATE"), DateTimeFormatter.ISO_LOCAL_DATE);
+            FoodEntity food = new FoodEntity(foodName, quantity, bestBeforeDate);
+            mFoodViewModel.insertFood(food);
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 }
