@@ -55,7 +55,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.FoodVi
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
-            foodItemView = itemView.findViewById(R.id.textView);
+            foodItemView = itemView.findViewById(R.id.text_foodName);
         }
     }
 }
